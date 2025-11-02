@@ -1,22 +1,14 @@
-const socket=io();
-const b=document.getElementById("board");
-function render(grid){
-  b.innerHTML="";
-  for(let r=0;r<15;r++){
-    for(let c=0;c<15;c++){
-      const d=document.createElement("div");
-      d.className="cell";
-      if(r===7&&c===7){d.classList.add("center");d.textContent="★";}
-      if(grid[r][c]) d.textContent=grid[r][c];
-      b.appendChild(d);
+document.addEventListener("DOMContentLoaded", () => {
+  const update = () => {
+    const saved = localStorage.getItem("scrabbleScores");
+    if (!saved) return;
+    const scores = JSON.parse(saved);
+    for (let t in scores) {
+      const el = document.getElementById(`score-${t}`);
+      if (el) el.textContent = scores[t];
     }
-  }
-}
-socket.on("state",s=>{
-  render(s.board);
-  document.getElementById("scores").innerHTML = Object.entries(s.scores).map(([t,v])=>`${t}: ${v}`).join("<br>");
-});
-socket.on("played",d=>{
-  render(d.board);
-  document.getElementById("scores").innerHTML = Object.entries(d.scores).map(([t,v])=>`${t}: ${v}`).join("<br>");
+  };
+
+  update();
+  setInterval(update, 2000); // refresh every 2 seconds
 });
