@@ -664,7 +664,6 @@ away
 awesome
 awful
 axis
-aye
 babies
 baby
 bachelor
@@ -758,13 +757,6 @@ battle
 battlefield
 bay
 bb
-bbc
-bbs
-bbw
-bc
-bd
-bdsm
-be
 beach
 beaches
 beads
@@ -843,7 +835,6 @@ benefit
 benefits
 benjamin
 bennett
-benz
 berkeley
 berlin
 bermuda
@@ -916,8 +907,6 @@ bits
 biz
 bizarre
 bizrate
-bk
-bl
 black
 blackberry
 blackjack
@@ -959,10 +948,6 @@ blowjobs
 blue
 blues
 bluetooth
-blvd
-bm
-bmw
-bo
 board
 boards
 boat
@@ -977,7 +962,6 @@ bold
 bolivia
 bolt
 bomb
-bon
 bond
 bondage
 bonds
@@ -1033,8 +1017,6 @@ boxes
 boxing
 boy
 boys
-bp
-br
 bra
 bracelet
 bracelets
@@ -1125,8 +1107,6 @@ brussels
 brutal
 bryan
 bryant
-bs
-bt
 bubble
 buck
 bucks
@@ -1195,8 +1175,6 @@ by
 bye
 byte
 bytes
-c
-ca
 cab
 cabin
 cabinet
