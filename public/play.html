@@ -1,109 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interhouse Scrabble - Player</title>
-  <link rel="stylesheet" href="common.css" />
-  <script src="/socket.io/socket.io.js"></script>
+  <meta charset="UTF-8">
+  <title>Play – AMBER SCRABBLE INTERHOUSE</title>
+  <link rel="stylesheet" href="common.css">
 </head>
-<body class="player-page">
-  <header>
-    <h1>🏆 Amber Interhouse Scrabble</h1>
-    <h2 id="teamName"></h2>
-  </header>
+<body class="play-screen">
+  <h1 id="teamName"></h1>
+  <div id="boardContainer"></div>
 
-  <main>
-    <div id="boardContainer">
-      <div id="board"></div>
-    </div>
+  <div id="rackContainer">
+    <h3>Your Tiles</h3>
+    <div id="rack"></div>
+  </div>
 
-    <div id="rackContainer">
-      <h3>Your Tiles</h3>
-      <div id="rack"></div>
-      <div id="controls">
-        <input type="text" id="wordInput" placeholder="Enter your word" />
-        <button id="submitWord">Submit Word</button>
-        <button id="passTurn">Pass Turn</button>
-      </div>
-    </div>
-  </main>
+  <div id="controls">
+    <button id="submitWord">✅ Submit Word</button>
+    <button id="passTurn">⏩ Pass Turn</button>
+  </div>
 
-  <footer>
-    <h3>Scores</h3>
-    <ul id="scoreList">
-      <li>🔵 Arabica: <span id="arabicaScore">0</span></li>
-      <li>🟠 Robusta: <span id="robustaScore">0</span></li>
-      <li>🟢 Excelsa: <span id="excelsaScore">0</span></li>
-      <li>🔴 Liberica: <span id="libericaScore">0</span></li>
-    </ul>
-  </footer>
+  <div id="message"></div>
 
-  <script>
-    const socket = io();
-    const urlParams = new URLSearchParams(window.location.search);
-    const team = urlParams.get('team') || 'spectator';
-    const teamColors = {
-      arabica: 'blue',
-      robusta: 'orange',
-      excelsa: 'green',
-      liberica: 'red'
-    };
-
-    document.getElementById('teamName').innerText = team.toUpperCase();
-    document.body.style.borderTop = `10px solid ${teamColors[team] || '#444'}`;
-
-    socket.emit('joinTeam', team);
-
-    socket.on('init', (state) => {
-      updateScores(state.scores);
-      renderBoard(state.board);
-    });
-
-    socket.on('updateScores', updateScores);
-
-    function updateScores(scores) {
-      document.getElementById('arabicaScore').innerText = scores.arabica;
-      document.getElementById('robustaScore').innerText = scores.robusta;
-      document.getElementById('excelsaScore').innerText = scores.excelsa;
-      document.getElementById('libericaScore').innerText = scores.liberica;
-    }
-
-    function renderBoard(board) {
-      const boardEl = document.getElementById('board');
-      boardEl.innerHTML = '';
-      for (let r = 0; r < 15; r++) {
-        const row = document.createElement('div');
-        row.classList.add('row');
-        for (let c = 0; c < 15; c++) {
-          const cell = document.createElement('div');
-          cell.classList.add('cell');
-          if (r === 7 && c === 7) {
-            cell.classList.add('center');
-            cell.innerHTML = '⭐';
-          }
-          row.appendChild(cell);
-        }
-        boardEl.appendChild(row);
-      }
-    }
-
-    document.getElementById('submitWord').onclick = () => {
-      const word = document.getElementById('wordInput').value.trim().toUpperCase();
-      if (word.length === 0) return alert('Enter a word!');
-      const points = word.length * 2; // simple scoring for now
-      socket.emit('playWord', { word, points });
-      document.getElementById('wordInput').value = '';
-    };
-
-    document.getElementById('passTurn').onclick = () => {
-      alert('Turn passed!');
-    };
-
-    socket.on('wordPlayed', (data) => {
-      const msg = `${data.team.toUpperCase()} played "${data.word}" (+${data.points})`;
-      console.log(msg);
-    });
-  </script>
+  <script src="client-js/play.js"></script>
 </body>
 </html>
