@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amber Scrabble - Team Play</title>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body class="play-body">
+  <h1>🎮 AMBER SCRABBLE INTERHOUSE</h1>
+
+  <div id="teamName" class="team-header">Loading Team...</div>
+
+  <div class="board-container">
+    <canvas id="scrabbleBoard" width="700" height="700"></canvas>
+  </div>
+
+  <div class="rack-container">
+    <h3>Your Tiles:</h3>
+    <div id="tileRack" class="tile-rack"></div>
+  </div>
+
+  <div class="controls">
+    <button id="submitWord" class="btn green">Submit Word</button>
+    <button id="passTurn" class="btn red">Pass Turn</button>
+  </div>
+
+  <div class="status">
+    <p><strong>Your Score:</strong> <span id="teamScore">0</span></p>
+    <p><strong>Game Status:</strong> <span id="gameStatus">Waiting for Start...</span></p>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client-js/play.js"></script>
+</body>
+</html>
