@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#f39e16,#83204e);
+  color:white;
+  text-align:center;
+}
+.title { background:rgba(0,0,0,0.3); padding:10px; }
+button { margin:5px; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; }
+#board {
+  display:grid;
+  grid-template-columns:repeat(15,38px);
+  grid-template-rows:repeat(15,38px);
+  justify-content:center;
+  margin:20px auto;
+  gap:2px;
+}
+.cell {
+  width:38px; height:38px; background:#fffbe8; color:black;
+  display:flex; align-items:center; justify-content:center; font-weight:bold;
+}
+.center { background:#fdd835; }
