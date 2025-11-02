@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amber Scrabble Interhouse - Live Display</title>
+  <link rel="stylesheet" href="common.css" />
+  <script src="client-js/display.js" defer></script>
+</head>
+<body>
+  <div class="header">
+    <h1>📺 AMBER SCRABBLE INTERHOUSE LIVE DISPLAY</h1>
+  </div>
+
+  <table class="scoreboard">
+    <thead>
+      <tr>
+        <th>House</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody id="scoreTable">
+      <tr><td><span class="dot blue"></span> Arabica</td><td id="arabica-score">0</td></tr>
+      <tr><td><span class="dot orange"></span> Robusta</td><td id="robusta-score">0</td></tr>
+      <tr><td><span class="dot green"></span> Excelsa</td><td id="excelsa-score">0</td></tr>
+      <tr><td><span class="dot red"></span> Liberica</td><td id="liberica-score">0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="turn-info">
+    <h2 id="turnDisplay">Waiting for game to start...</h2>
+  </div>
+</body>
+</html>
 
