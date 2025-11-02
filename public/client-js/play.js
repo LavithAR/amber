@@ -1,25 +1,47 @@
-const socket=io();
-const b=document.getElementById("board");
-function render(grid){
-  b.innerHTML="";
-  for(let r=0;r<15;r++){
-    for(let c=0;c<15;c++){
-      const d=document.createElement("div");
-      d.className="cell";
-      if(r===7&&c===7){d.classList.add("center");d.textContent="★";}
-      if(grid[r][c]) d.textContent=grid[r][c];
-      b.appendChild(d);
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const team = urlParams.get("team");
+  if (!team) {
+    document.body.innerHTML = "<h2>Invalid team link!</h2>";
+    return;
   }
-}
-socket.on("state",s=>render(s.board));
-socket.on("played",d=>render(d.board));
-socket.on("msg",m=>document.getElementById("msg").textContent=m);
 
-document.getElementById("joinBtn").onclick=()=>{
-  socket.emit("join",{team:team.value,name:name.value});
-};
-document.getElementById("submit").onclick=()=>{
-  socket.emit("play:word",{word:word.value,row:+row.value,col:+col.value,dir:dir.value});
-};
-document.getElementById("pass").onclick=()=>socket.emit("play:pass");
+  const teamColors = {
+    arabica: "blue",
+    robusta: "orange",
+    excelsa: "green",
+    liberica: "red",
+  };
+
+  document.body.style.borderTop = `8px solid ${teamColors[team]}`;
+  document.getElementById("teamName").innerHTML = `${team.toUpperCase()} 🟩`;
+  const rackDiv = document.getElementById("rack");
+  const msgDiv = document.getElementById("message");
+
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const rack = Array.from({ length: 7 }, () =>
+    letters.charAt(Math.floor(Math.random() * letters.length))
+  );
+
+  rackDiv.textContent = rack.join(" ");
+
+  document.getElementById("submitWord").addEventListener("click", async () => {
+    const word = prompt("Enter your word:").trim().toLowerCase();
+    if (!word) return;
+
+    const res = await fetch(`/validate/${word}`);
+    const data = await res.json();
+    if (data.valid) {
+      msgDiv.textContent = `✅ "${word.toUpperCase()}" accepted! +${word.length} points`;
+      let scores = JSON.parse(localStorage.getItem("scrabbleScores") || "{}");
+      scores[team] = (scores[team] || 0) + word.length;
+      localStorage.setItem("scrabbleScores", JSON.stringify(scores));
+    } else {
+      msgDiv.textContent = `❌ "${word.toUpperCase()}" is invalid!`;
+    }
+  });
+
+  document.getElementById("passTurn").addEventListener("click", () => {
+    msgDiv.textContent = "Turn passed.";
+  });
+});
