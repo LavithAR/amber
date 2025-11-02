@@ -1,85 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Control - Amber Interhouse Scrabble</title>
-  <link rel="stylesheet" href="common.css" />
-  <script src="/socket.io/socket.io.js"></script>
+  <meta charset="UTF-8">
+  <title>AMBER SCRABBLE INTERHOUSE – ADMIN</title>
+  <link rel="stylesheet" href="common.css">
 </head>
+<body class="admin-screen">
+  <h1>🏆 AMBER SCRABBLE INTERHOUSE – ADMIN DASHBOARD</h1>
+  <div class="admin-controls">
+    <button id="startGame">🟢 Start Game</button>
+    <button id="pauseGame">🟡 Pause / Resume</button>
+    <button id="nextRound">🔵 Next Round</button>
+    <button id="resetGame">🔴 Reset Game</button>
+  </div>
 
-<body class="admin-page">
-  <header>
-    <h1>🧭 Admin Control Panel</h1>
-    <h2>Amber Interhouse Scrabble</h2>
-  </header>
+  <h2>📊 Live Scoreboard</h2>
+  <table id="scoreboard">
+    <thead>
+      <tr><th>Team</th><th>Score</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Arabica 🟦</td><td id="arabicaScore">0</td></tr>
+      <tr><td>Robusta 🟧</td><td id="robustaScore">0</td></tr>
+      <tr><td>Excelsa 🟩</td><td id="excelsaScore">0</td></tr>
+      <tr><td>Liberica 🟥</td><td id="libericaScore">0</td></tr>
+    </tbody>
+  </table>
 
-  <main>
-    <div class="admin-controls">
-      <button id="startGame" class="green">🟢 Start Game</button>
-      <button id="pauseGame" class="yellow">🟡 Pause / Resume</button>
-      <button id="nextRound" class="blue">🔵 Next Round</button>
-      <button id="resetGame" class="red">🔴 Reset Game</button>
-    </div>
-
-    <div class="admin-display">
-      <h3>📊 Live Scoreboard</h3>
-      <table id="scoreTable">
-        <thead>
-          <tr>
-            <th>House</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>🔵 Arabica</td><td id="arabicaScore">0</td></tr>
-          <tr><td>🟠 Robusta</td><td id="robustaScore">0</td></tr>
-          <tr><td>🟢 Excelsa</td><td id="excelsaScore">0</td></tr>
-          <tr><td>🔴 Liberica</td><td id="libericaScore">0</td></tr>
-        </tbody>
-      </table>
-
-      <div class="turn-info">
-        <h3>🎯 Current Turn:</h3>
-        <span id="currentTurn">Waiting...</span>
-      </div>
-
-      <div class="word-log">
-        <h3>📝 Words Played</h3>
-        <ul id="wordList"></ul>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>Only Admin can start or control the game.</p>
-  </footer>
-
-  <script>
-    const socket = io();
-    const wordList = document.getElementById("wordList");
-
-    document.getElementById("startGame").onclick = () => socket.emit("adminCommand", { type: "start" });
-    document.getElementById("pauseGame").onclick = () => socket.emit("adminCommand", { type: "pause" });
-    document.getElementById("nextRound").onclick = () => socket.emit("adminCommand", { type: "nextRound" });
-    document.getElementById("resetGame").onclick = () => socket.emit("adminCommand", { type: "reset" });
-
-    socket.on("updateScores", (scores) => {
-      document.getElementById("arabicaScore").innerText = scores.arabica;
-      document.getElementById("robustaScore").innerText = scores.robusta;
-      document.getElementById("excelsaScore").innerText = scores.excelsa;
-      document.getElementById("libericaScore").innerText = scores.liberica;
-    });
-
-    socket.on("turnUpdate", (team) => {
-      document.getElementById("currentTurn").innerText = team.toUpperCase();
-    });
-
-    socket.on("wordPlayed", (data) => {
-      const item = document.createElement("li");
-      item.innerText = `${data.team.toUpperCase()} played "${data.word}" (+${data.points})`;
-      wordList.prepend(item);
-    });
-  </script>
+  <script src="client-js/admin.js"></script>
 </body>
 </html>
+
