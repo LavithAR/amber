@@ -1,15 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>DISPLAY | AMBER SCRABBLE INTERHOUSE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amber Interhouse Scrabble - Display</title>
   <link rel="stylesheet" href="common.css">
-</head>
-<body>
-  <h1 class="title">🖥️ AMBER SCRABBLE INTERHOUSE — LIVE</h1>
-  <div id="board" class="board"></div>
-  <div id="scores"></div>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/client-js/display.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f39e16, #83204e);
+      font-family: "Poppins", sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    #header {
+      margin-top: 15px;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(15, 35px);
+      grid-template-rows: repeat(15, 35px);
+      gap: 2px;
+      justify-content: center;
+      margin: 25px auto;
+    }
+    .cell {
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: white;
+    }
+    .center {
+      background: rgba(255, 255, 255, 0.2);
+      color: gold;
+    }
+    #scores {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      font-size: 22px;
+    }
+    .score {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 12px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .arabica { border: 2px solid #00aaff; }
+    .robusta { border: 2px solid #ff8800; }
+    .excelsa { border: 2px solid #22cc66; }
+    .liberica { border: 2px solid #ff4444; }
+    #turn {
+      margin-top: 30px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    #log {
+      margin-top: 30px;
+      font-size: 18px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header">
+    <h1>🏆 AMBER INTERHOUSE SCRABBLE</h1>
+    <h3>Live Board & Scores</h3>
+  </div>
+
+  <div id="board"></div>
+
+  <div id="scores">
+    <div class="score arabica">🔵 Arabica: <span id="arabicaScore">0</span></div>
+    <div class="score robusta">🟠 Robusta: <span id="robustaScore">0</span></div>
+    <div class="score excelsa">🟢 Excelsa: <span id="excelsaScore">0</span></div>
+    <div class="score liberica">🔴 Liberica: <span id="libericaScore">0</span></div>
+  </div>
+
+  <div id="turn">Waiting for game start...</div>
+
+  <div id="log"></div>
+
+  <script>
+    const socket = io();
+
+    function renderBoard(board) {
+      const boardEl = document.getElementById("board");
+      boardEl.innerHTML = "";
+      for (let r = 0; r < 15; r++) {
+        for (let c = 0; c < 15; c++) {
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          if (r === 7 && c === 7) {
+            cell.classList.add("center");
+            cell.innerHTML = "⭐";
+          } else {
+            cell.innerHTML = board[r]?.[c] || "";
+          }
+          boardEl.appendChild(cell);
+        }
+      }
+    }
+
+    socket.on("init", (state) => {
+      updateScores(state.scores);
+      renderBoard(state.board);
+      document.getElementById("turn").innerText = `Current Turn: ${state.currentTurn.toUpperCase()}`;
+    });
+
+    socket.on("updateScores", updateScores);
+
+    function updateScores(scores) {
+      document.getElementById("arabicaScore").innerText = scores.arabica;
+      document.getElementById("robustaScore").innerText = scores.robusta;
+      document.getElementById("excelsaScore").innerText = scores.excelsa;
+      document.getElementById("libericaScore").innerText = scores.liberica;
+    }
+
+    socket.on("turnUpdate", (team) => {
+      document.getElementById("turn").innerText = `Current Turn: ${team.toUpperCase()}`;
+    });
+
+    socket.on("wordPlayed", (data) => {
+      const log = document.getElementById("log");
+      const p = document.createElement("p");
+      p.textContent = `${data.team.toUpperCase()} played "${data.word}" (+${data.points})`;
+      log.prepend(p);
+    });
+  </script>
 </body>
 </html>
