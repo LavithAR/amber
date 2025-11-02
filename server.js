@@ -1,81 +1,74 @@
+// ================================
+// AMBER SCRABBLE INTERHOUSE SERVER
+// ================================
+
 const express = require("express");
-const app = express();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const socketIo = require("socket.io");
 
-const PORT = process.env.PORT || 3000;
-
-app.use(express.static(path.join(__dirname, "public")));
-
-let players = {};
-let board = Array(15)
-  .fill(null)
-  .map(() => Array(15).fill(""));
-let scores = {
-  Arabica: 0,
-  Robusta: 0,
-  Excelsa: 0,
-  Liberica: 0
-};
-
-const dictionary = new Set(
-  fs
-    .readFileSync(path.join(__dirname, "dictionary.txt"), "utf8")
-    .split(/\r?\n/)
-    .map((w) => w.trim().toUpperCase())
-);
-
-io.on("connection", (socket) => {
-  socket.on("join", (team) => {
-    players[socket.id] = team;
-    io.emit("updateScores", scores);
-  });
-
-  socket.on("placeWord", ({ word, x, y, direction }) => {
-    const team = players[socket.id];
-    if (!team) return;
-
-    if (!dictionary.has(word.toUpperCase())) {
-      socket.emit("invalidWord", word);
-      return;
-    }
-
-    for (let i = 0; i < word.length; i++) {
-      const letter = word[i].toUpperCase();
-      if (direction === "across") board[y][x + i] = letter;
-      else board[y + i][x] = letter;
-    }
-
-    let score = word.length * 2;
-    scores[team] += score;
-
-    io.emit("updateBoard", board);
-    io.emit("updateScores", scores);
-  });
-
-  socket.on("disconnect", () => {
-    delete players[socket.id];
-  });
-});
-
-http.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  const express = require("express");
-const path = require("path");
 const app = express();
-const PORT = process.env.PORT || 10000;
+const server = http.createServer(app);
+const io = socketIo(server);
 
-// Serve static frontend files
+const PORT = process.env.PORT || 10000;
+const DICTIONARY_PATH = path.join(__dirname, "dictionary.txt");
+
+// Load dictionary
+let dictionary = new Set();
+try {
+  const words = fs.readFileSync(DICTIONARY_PATH, "utf-8").split(/\r?\n/);
+  words.forEach(w => dictionary.add(w.trim().toUpperCase()));
+  console.log(`✅ Dictionary loaded: ${dictionary.size} words`);
+} catch (err) {
+  console.error("❌ Error loading dictionary:", err);
+}
+
+// Serve static frontend
 app.use(express.static(path.join(__dirname, "client")));
 
-// Fallback route for index.html
+// Fallback to index.html for frontend routing
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+// Player and game state
+let players = {};
+let currentTurn = 0;
+let playerOrder = [];
 
+io.on("connection", (socket) => {
+  console.log("🟢 Player connected:", socket.id);
+
+  socket.on("joinGame", (name) => {
+    if (!players[socket.id]) {
+      players[socket.id] = { name, score: 0 };
+      playerOrder.push(socket.id);
+    }
+    io.emit("updatePlayers", Object.values(players));
+  });
+
+  socket.on("wordPlayed", (word) => {
+    const valid = dictionary.has(word.toUpperCase());
+    if (valid) {
+      players[socket.id].score += word.length * 10;
+      io.emit("message", `${players[socket.id].name} played '${word}' ✅`);
+    } else {
+      io.emit("message", `${players[socket.id].name} tried '${word}' ❌`);
+    }
+    io.emit("updatePlayers", Object.values(players));
+  });
+
+  socket.on("disconnect", () => {
+    console.log("🔴 Player disconnected:", socket.id);
+    delete players[socket.id];
+    playerOrder = playerOrder.filter(id => id !== socket.id);
+    io.emit("updatePlayers", Object.values(players));
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
 
