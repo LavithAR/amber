@@ -1,10 +1,4 @@
-a
-aa
-aaa
-aaron
-ab
 abandoned
-abc
 aberdeen
 abilities
 ability
@@ -15,7 +9,6 @@ about
 above
 abraham
 abroad
-abs
 absence
 absent
 absolute
@@ -23,13 +16,10 @@ absolutely
 absorption
 abstract
 abstracts
-abu
 abuse
-ac
 academic
 academics
 academy
-acc
 accent
 accept
 acceptable
