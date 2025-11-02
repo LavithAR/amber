@@ -1,1 +1,12 @@
-{}
+{
+  "players": {},
+  "scores": {
+    "arabica": 0,
+    "robusta": 0,
+    "excelsa": 0,
+    "liberica": 0
+  },
+  "board": [],
+  "currentTurn": "arabica",
+  "started": false
+}
