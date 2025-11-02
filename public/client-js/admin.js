@@ -1,39 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const scores = {
-    arabica: 0,
-    robusta: 0,
-    excelsa: 0,
-    liberica: 0,
-  };
+const socket = io();
+const log = document.getElementById("log");
 
-  const updateScoreboard = () => {
-    for (let team in scores) {
-      document.getElementById(`${team}Score`).textContent = scores[team];
-    }
-    localStorage.setItem("scrabbleScores", JSON.stringify(scores));
-  };
+function logMessage(msg) {
+  log.innerHTML += `<p>${msg}</p>`;
+}
 
-  const saved = localStorage.getItem("scrabbleScores");
-  if (saved) Object.assign(scores, JSON.parse(saved));
-  updateScoreboard();
-
-  document.getElementById("startGame").addEventListener("click", () => {
-    alert("Game started! All players can now play.");
-  });
-
-  document.getElementById("pauseGame").addEventListener("click", () => {
-    alert("Game paused or resumed!");
-  });
-
-  document.getElementById("nextRound").addEventListener("click", () => {
-    alert("Next round starting!");
-  });
-
-  document.getElementById("resetGame").addEventListener("click", () => {
-    if (confirm("Are you sure you want to reset all scores?")) {
-      for (let t in scores) scores[t] = 0;
-      updateScoreboard();
-      alert("Game reset!");
-    }
-  });
+document.getElementById("startGame").onclick = () => socket.emit("resetGame");
+socket.on("update", (data) => {
+  document.getElementById("turn").innerText = `Turn: ${data.turn.toUpperCase()}`;
+  document.getElementById("scores").innerText = JSON.stringify(data.scores, null, 2);
 });
