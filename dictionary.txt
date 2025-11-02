@@ -1170,8 +1170,6 @@ buyers
 buying
 buys
 buzz
-bw
-by
 bye
 byte
 bytes
@@ -1183,13 +1181,11 @@ cable
 cables
 cache
 cached
-cad
 cadillac
 cafe
 cage
 cake
 cakes
-cal
 calcium
 calculate
 calculated
@@ -1299,8 +1295,6 @@ cartoon
 cartoons
 cartridge
 cartridges
-cas
-casa
 case
 cases
 casey
@@ -1336,15 +1330,6 @@ causing
 caution
 cave
 cayman
-cb
-cbs
-cc
-ccd
-cd
-cdna
-cds
-cdt
-ce
 cedar
 ceiling
 celebrate
@@ -1380,11 +1365,7 @@ certification
 certified
 cest
 cet
-cf
-cfr
-cg
 cgi
-ch
 chad
 chain
 chains
@@ -1487,7 +1468,6 @@ china
 chinese
 chip
 chips
-cho
 chocolate
 choice
 choices
@@ -1516,7 +1496,6 @@ chubby
 chuck
 church
 churches
-ci
 cia
 cialis
 ciao
@@ -1551,8 +1530,6 @@ civic
 civil
 civilian
 civilization
-cj
-cl
 claim
 claimed
 claims
@@ -1621,13 +1598,8 @@ club
 clubs
 cluster
 clusters
-cm
-cms
-cn
 cnet
 cnetcom
-cnn
-co
 coach
 coaches
 coaching
@@ -1640,7 +1612,6 @@ coated
 coating
 cock
 cocks
-cod
 code
 codes
 coding
@@ -1739,7 +1710,6 @@ communications
 communist
 communities
 community
-comp
 compact
 companies
 companion
@@ -1801,7 +1771,6 @@ computed
 computer
 computers
 computing
-con
 concentrate
 concentration
 concentrations
@@ -1829,7 +1798,6 @@ condos
 conduct
 conducted
 conducting
-conf
 conference
 conferences
 conferencing
@@ -1863,7 +1831,6 @@ connections
 connectivity
 connector
 connectors
-cons
 conscious
 consciousness
 consecutive
@@ -1893,7 +1860,6 @@ consolidated
 consolidation
 consortium
 conspiracy
-const
 constant
 constantly
 constitute
@@ -1996,7 +1962,6 @@ coordinated
 coordinates
 coordination
 coordinator
-cop
 cope
 copied
 copies
@@ -2078,9 +2043,7 @@ covers
 cow
 cowboy
 cox
-cp
 cpu
-cr
 crack
 cradle
 craft
@@ -2118,7 +2081,6 @@ criterion
 critical
 criticism
 critics
-crm
 croatia
 crop
 crops
@@ -2134,11 +2096,6 @@ cruises
 cruz
 cry
 crystal
-cs
-css
-cst
-ct
-cu
 cuba
 cube
 cubic
@@ -2177,19 +2134,13 @@ cut
 cute
 cuts
 cutting
-cv
-cvs
-cw
 cyber
 cycle
 cycles
 cycling
 cylinder
 cyprus
-cz
 czech
-d
-da
 dad
 daddy
 daily
