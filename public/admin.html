@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amber Scrabble Admin</title>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body class="admin-body">
+  <h1>🧭 AMBER SCRABBLE INTERHOUSE — ADMIN PANEL</h1>
+
+  <div class="admin-controls">
+    <button id="startGame" class="btn green">🟢 Start Game</button>
+    <button id="pauseGame" class="btn yellow">🟡 Pause / Resume</button>
+    <button id="nextRound" class="btn blue">🔵 Next Round</button>
+    <button id="resetGame" class="btn red">🔴 Reset Game</button>
+  </div>
+
+  <h2>🏆 Live Scoreboard</h2>
+  <table id="scoreboard">
+    <thead>
+      <tr><th>House</th><th>Score</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Arabica (Blue)</td><td id="arabicaScore">0</td></tr>
+      <tr><td>Robusta (Orange)</td><td id="robustaScore">0</td></tr>
+      <tr><td>Excelsa (Green)</td><td id="excelsaScore">0</td></tr>
+      <tr><td>Liberica (Red)</td><td id="libericaScore">0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="game-status">
+    <p><strong>Current Turn:</strong> <span id="currentTeam">--</span></p>
+    <p><strong>Last Word:</strong> <span id="lastWord">--</span></p>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client-js/admin.js"></script>
+</body>
+</html>
 
