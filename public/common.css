@@ -1,21 +1,125 @@
+/* 🌟 Amber Scrabble Interhouse - Common Styles */
+
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#f39e16,#83204e);
-  color:white;
-  text-align:center;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f39e16, #83204e);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
 }
-.title { background:rgba(0,0,0,0.3); padding:10px; }
-button { margin:5px; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; }
+
+header {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px 10px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+h1, h2, h3 {
+  margin: 5px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+main {
+  margin-top: 20px;
+}
+
+button {
+  background: #f39e16;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 6px;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #83204e;
+}
+
+.green { background-color: #2ecc71; }
+.yellow { background-color: #f1c40f; color: black; }
+.blue { background-color: #3498db; }
+.red { background-color: #e74c3c; }
+
 #board {
-  display:grid;
-  grid-template-columns:repeat(15,38px);
-  grid-template-rows:repeat(15,38px);
-  justify-content:center;
-  margin:20px auto;
-  gap:2px;
+  display: grid;
+  grid-template-columns: repeat(15, 35px);
+  grid-template-rows: repeat(15, 35px);
+  gap: 2px;
+  justify-content: center;
+  margin: 20px auto;
 }
+
 .cell {
-  width:38px; height:38px; background:#fffbe8; color:black;
-  display:flex; align-items:center; justify-content:center; font-weight:bold;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
 }
-.center { background:#fdd835; }
+
+.cell.center {
+  background: rgba(255, 255, 255, 0.3);
+  color: gold;
+}
+
+#rack {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+#rack div {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+footer {
+  margin-top: 25px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+table {
+  width: 70%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#wordList {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#wordList li {
+  padding: 5px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.turn-info, .word-log {
+  margin-top: 20px;
+}
