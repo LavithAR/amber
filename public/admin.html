@@ -1,32 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AMBER SCRABBLE INTERHOUSE – ADMIN</title>
-  <link rel="stylesheet" href="common.css">
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="common.css" />
 </head>
-<body class="admin-screen">
-  <h1>🏆 AMBER SCRABBLE INTERHOUSE – ADMIN DASHBOARD</h1>
-  <div class="admin-controls">
-    <button id="startGame">🟢 Start Game</button>
-    <button id="pauseGame">🟡 Pause / Resume</button>
-    <button id="nextRound">🔵 Next Round</button>
-    <button id="resetGame">🔴 Reset Game</button>
-  </div>
-
-  <h2>📊 Live Scoreboard</h2>
-  <table id="scoreboard">
-    <thead>
-      <tr><th>Team</th><th>Score</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Arabica 🟦</td><td id="arabicaScore">0</td></tr>
-      <tr><td>Robusta 🟧</td><td id="robustaScore">0</td></tr>
-      <tr><td>Excelsa 🟩</td><td id="excelsaScore">0</td></tr>
-      <tr><td>Liberica 🟥</td><td id="libericaScore">0</td></tr>
-    </tbody>
-  </table>
-
+<body>
+  <h1>🧭 Admin Dashboard</h1>
+  <button id="startGame">Start / Reset Game</button>
+  <h3 id="turn"></h3>
+  <pre id="scores"></pre>
+  <div id="log"></div>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="client-js/admin.js"></script>
 </body>
 </html>
