@@ -23,41 +23,17 @@ const msg = document.getElementById('message');
 // render empty 15x15 grid (cells are updated from state)
 function renderBoard(grid) {
   boardEl.innerHTML = '';
-
-  // Top-left corner (empty)
-  const corner = document.createElement('div');
-  corner.className = 'corner';
-  boardEl.appendChild(corner);
-
-  // Top numbers (1–15)
-  for (let c = 0; c < 15; c++) {
-    const topNum = document.createElement('div');
-    topNum.className = 'label top';
-    topNum.innerText = c + 1;
-    boardEl.appendChild(topNum);
-  }
-
-  // Rows: left numbers + cells
-  for (let r = 0; r < 15; r++) {
-    const leftNum = document.createElement('div');
-    leftNum.className = 'label side';
-    leftNum.innerText = r + 1;
-    boardEl.appendChild(leftNum);
-
-    for (let c = 0; c < 15; c++) {
+  for (let r=0;r<15;r++){
+    for (let c=0;c<15;c++){
       const cell = document.createElement('div');
       cell.className = 'cell';
-      if (r === 7 && c === 7) {
-        cell.classList.add('center');
-        cell.innerText = '★';
-      }
+      if (r===7 && c===7) { cell.classList.add('center'); cell.innerText = '★'; }
       const letter = grid?.[r]?.[c] || '';
       if (letter) cell.innerText = letter;
       boardEl.appendChild(cell);
     }
   }
 }
-
 
 // simple rack generator (random letters) for UI only
 let rack = [];
