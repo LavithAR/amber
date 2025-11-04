@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+    "build": "echo Building Amber Scrabble Interhouse... && mkdir -p data && echo '{}' > data/saved_game.json",
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,3 +17,4 @@
     "node": ">=16"
   }
 }
+
