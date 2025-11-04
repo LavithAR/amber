@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="common.css" />
+  <meta charset="utf-8">
+  <title>ADMIN — AMBER SCRABBLE INTERHOUSE</title>
+  <link rel="stylesheet" href="common.css">
 </head>
 <body>
-  <h1>🧭 Admin Dashboard</h1>
-  <button id="startGame">Start / Reset Game</button>
-  <h3 id="turn"></h3>
-  <pre id="scores"></pre>
-  <div id="log"></div>
+  <header class="header"><h1>AMBER SCRABBLE INTERHOUSE — ADMIN</h1></header>
+  <div class="container">
+    <div class="controls">
+      <button id="startBtn" class="btn-small">🟢 Start</button>
+      <button id="pauseBtn" class="btn-small">⏸ Pause</button>
+      <button id="nextBtn" class="btn-small">➡ Next</button>
+      <button id="resetBtn" class="btn-small">🔴 Reset</button>
+    </div>
+
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+      <div class="scoreboard panel">
+        <h3>Live Scores</h3>
+        <table>
+          <tr><td>Arabica</td><td id="score-arabica">0</td></tr>
+          <tr><td>Robusta</td><td id="score-robusta">0</td></tr>
+          <tr><td>Excelsa</td><td id="score-excelsa">0</td></tr>
+          <tr><td>Liberica</td><td id="score-liberica">0</td></tr>
+        </table>
+        <p class="small">Current turn: <span id="currentTurn">--</span></p>
+      </div>
+
+      <div class="panel" style="min-width:320px;">
+        <h3>Moves (latest first)</h3>
+        <div id="movesLog" class="log"></div>
+      </div>
+    </div>
+
+  </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="client-js/admin.js"></script>
 </body>
 </html>
-
