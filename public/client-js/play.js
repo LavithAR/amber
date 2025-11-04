@@ -23,17 +23,29 @@ const msg = document.getElementById('message');
 // render empty 15x15 grid (cells are updated from state)
 function renderBoard(grid) {
   boardEl.innerHTML = '';
-  for (let r=0;r<15;r++){
-    for (let c=0;c<15;c++){
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-      if (r===7 && c===7) { cell.classList.add('center'); cell.innerText = '★'; }
-      const letter = grid?.[r]?.[c] || '';
-      if (letter) cell.innerText = letter;
-      boardEl.appendChild(cell);
-    }
+
+  // Top row (empty corner + numbers 1–15)
+  const topRow = document.createElement('div');
+  topRow.className = 'row';
+  topRow.innerHTML = `<div class="corner"></div>` +
+    Array.from({ length: 15 }, (_, i) => `<div class="label top">${i + 1}</div>`).join('');
+  boardEl.appendChild(topRow);
+
+  // Rows with left numbers + cells
+  for (let r = 0; r < 15; r++) {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'row';
+    rowDiv.innerHTML = `<div class="label side">${r + 1}</div>` +
+      Array.from({ length: 15 }, (_, c) => {
+        const letter = grid?.[r]?.[c] || '';
+        const center = (r === 7 && c === 7) ? 'center' : '';
+        const symbol = center ? '★' : letter;
+        return `<div class="cell ${center}">${symbol}</div>`;
+      }).join('');
+    boardEl.appendChild(rowDiv);
   }
 }
+
 
 // simple rack generator (random letters) for UI only
 let rack = [];
