@@ -20,53 +20,18 @@ const colInput = document.getElementById('colInput');
 const dirInput = document.getElementById('dirInput');
 const msg = document.getElementById('message');
 
-// letters for column labels
-const columns = "ABCDEFGHIJKLMNO".split("");
-
 // render empty 15x15 grid (cells are updated from state)
 function renderBoard(grid) {
   boardEl.innerHTML = '';
-  // Add top labels
-  const topRow = document.createElement('div');
-  topRow.className = 'top-labels';
-  for (let c = 0; c < 15; c++) {
-    const label = document.createElement('div');
-    label.className = 'coord-top';
-    label.innerText = columns[c];
-    topRow.appendChild(label);
-  }
-  boardEl.appendChild(topRow);
-
-  // Create main grid
-  for (let r = 0; r < 15; r++) {
-    const rowDiv = document.createElement('div');
-    rowDiv.className = 'row';
-    const rowLabel = document.createElement('div');
-    rowLabel.className = 'coord-left';
-    rowLabel.innerText = r + 1;
-    rowDiv.appendChild(rowLabel);
-
-    for (let c = 0; c < 15; c++) {
+  for (let r=0;r<15;r++){
+    for (let c=0;c<15;c++){
       const cell = document.createElement('div');
       cell.className = 'cell';
-      if (r === 7 && c === 7) {
-        cell.classList.add('center');
-        cell.innerText = '★';
-      }
-
+      if (r===7 && c===7) { cell.classList.add('center'); cell.innerText = '★'; }
       const letter = grid?.[r]?.[c] || '';
       if (letter) cell.innerText = letter;
-
-      // Small coordinate in top-left of each cell
-      const coord = document.createElement('span');
-      coord.className = 'coord-mini';
-      coord.innerText = `${columns[c]}${r + 1}`;
-      cell.appendChild(coord);
-
-      rowDiv.appendChild(cell);
+      boardEl.appendChild(cell);
     }
-
-    boardEl.appendChild(rowDiv);
   }
 }
 
@@ -75,7 +40,7 @@ let rack = [];
 function fillRack() {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   while (rack.length < 7) {
-    rack.push(letters.charAt(Math.floor(Math.random() * letters.length)));
+    rack.push(letters.charAt(Math.floor(Math.random()*letters.length)));
   }
   rackEl.innerHTML = '';
   rack.forEach(l => {
@@ -101,8 +66,9 @@ socket.on('state', s => {
 });
 
 socket.on('played', m => {
+  // update UI briefly
   msg.innerText = `${m.team.toUpperCase()} played ${m.word} (+${m.points})`;
-  setTimeout(() => msg.innerText = '', 3500);
+  setTimeout(()=> msg.innerText = '', 3500);
 });
 
 socket.on('errorMsg', m => {
@@ -122,5 +88,5 @@ document.getElementById('submitBtn').onclick = () => {
 document.getElementById('passBtn').onclick = () => {
   socket.emit('play:pass');
   msg.innerText = 'Passed turn';
-  setTimeout(() => msg.innerText = '', 2000);
+  setTimeout(()=> msg.innerText = '', 2000);
 };
