@@ -1,20 +1,17 @@
 {
-  "name": "amber-scrabble-final",
+  "name": "amber-scrabble-interhouse",
   "version": "1.0.0",
-  "description": "Amber Scrabble Interhouse - multiplayer (admin, players, display) with Socket.IO",
+  "description": "Amber Valley Interhouse Scrabble Competition System",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-    "build": "echo Building Amber Scrabble Interhouse... && mkdir -p data && echo '{}' > data/saved_game.json",
+    "start": "node server.js",
+    "build": "echo Build successful!"
   },
+  "author": "Amber Valley",
+  "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "fs-extra": "^11.1.1",
-    "socket.io": "^4.7.5"
-  },
-  "engines": {
-    "node": ">=16"
+    "socket.io": "^4.7.2",
+    "fs-extra": "^11.2.0"
   }
 }
-
