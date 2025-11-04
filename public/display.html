@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amber Scrabble Interhouse - Live Display</title>
-  <link rel="stylesheet" href="common.css" />
-  <script src="client-js/display.js" defer></script>
+  <meta charset="utf-8">
+  <title>DISPLAY — AMBER SCRABBLE INTERHOUSE</title>
+  <link rel="stylesheet" href="common.css">
 </head>
 <body>
-  <div class="header">
-    <h1>📺 AMBER SCRABBLE INTERHOUSE LIVE DISPLAY</h1>
+  <header class="header"><h1>AMBER SCRABBLE — LIVE DISPLAY</h1></header>
+  <div class="container">
+    <div id="board" class="board"></div>
+    <div style="display:flex;gap:20px;justify-content:center;margin-top:12px;">
+      <div class="scoreboard panel">
+        <h3>Scores</h3>
+        <table>
+          <tr><td>Arabica</td><td id="score-arabica">0</td></tr>
+          <tr><td>Robusta</td><td id="score-robusta">0</td></tr>
+          <tr><td>Excelsa</td><td id="score-excelsa">0</td></tr>
+          <tr><td>Liberica</td><td id="score-liberica">0</td></tr>
+        </table>
+      </div>
+      <div class="panel" style="min-width:300px;">
+        <h3>Current Turn</h3>
+        <div id="currentTurn" style="font-size:1.3rem">--</div>
+        <h4 style="margin-top:10px">Recent Moves</h4>
+        <div id="recent" class="log"></div>
+      </div>
+    </div>
   </div>
 
-  <table class="scoreboard">
-    <thead>
-      <tr>
-        <th>House</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody id="scoreTable">
-      <tr><td><span class="dot blue"></span> Arabica</td><td id="arabica-score">0</td></tr>
-      <tr><td><span class="dot orange"></span> Robusta</td><td id="robusta-score">0</td></tr>
-      <tr><td><span class="dot green"></span> Excelsa</td><td id="excelsa-score">0</td></tr>
-      <tr><td><span class="dot red"></span> Liberica</td><td id="liberica-score">0</td></tr>
-    </tbody>
-  </table>
-
-  <div class="turn-info">
-    <h2 id="turnDisplay">Waiting for game to start...</h2>
-  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client-js/display.js"></script>
 </body>
 </html>
-
