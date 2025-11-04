@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Play – AMBER SCRABBLE INTERHOUSE</title>
+  <meta charset="utf-8">
+  <title>PLAY — AMBER SCRABBLE INTERHOUSE</title>
   <link rel="stylesheet" href="common.css">
 </head>
-<body class="play-screen">
-  <h1 id="teamName"></h1>
-  <div id="boardContainer"></div>
+<body>
+  <header class="header"><h1 id="title">AMBER SCRABBLE — PLAYER</h1></header>
 
-  <div id="rackContainer">
-    <h3>Your Tiles</h3>
-    <div id="rack"></div>
+  <div class="container">
+    <div style="text-align:center;">
+      <h3 id="teamLabel">Team: </h3>
+      <p class="small">Open this link with ?team=arabica (or robusta, excelsa, liberica)</p>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div style="text-align:center;">
+      <h3>Your Tiles</h3>
+      <div id="rack" class="rack"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:12px;">
+      <input id="wordInput" placeholder="Word (e.g. HELLO)" />
+      <input id="rowInput" type="number" min="0" max="14" placeholder="row 0-14" style="width:90px"/>
+      <input id="colInput" type="number" min="0" max="14" placeholder="col 0-14" style="width:90px"/>
+      <select id="dirInput"><option value="across">across</option><option value="down">down</option></select>
+      <button id="submitBtn">Submit</button>
+      <button id="passBtn">Pass</button>
+      <div id="message" class="small"></div>
+    </div>
   </div>
 
-  <div id="controls">
-    <button id="submitWord">✅ Submit Word</button>
-    <button id="passTurn">⏩ Pass Turn</button>
-  </div>
-
-  <div id="message"></div>
-
+  <script src="/socket.io/socket.io.js"></script>
   <script src="client-js/play.js"></script>
 </body>
 </html>
