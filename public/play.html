@@ -14,7 +14,12 @@
       <p class="small">Open this link with ?team=arabica (or robusta, excelsa, liberica)</p>
     </div>
 
-    <div id="board" class="board"></div>
+    <!-- 🧩 BOARD WITH LABELS -->
+    <div id="board-container" style="display:flex; justify-content:center; position:relative; margin-top:15px;">
+      <div id="column-labels" class="labels-row"></div>
+      <div id="board" class="board"></div>
+      <div id="row-labels" class="labels-col"></div>
+    </div>
 
     <div style="text-align:center;">
       <h3>Your Tiles</h3>
@@ -25,7 +30,10 @@
       <input id="wordInput" placeholder="Word (e.g. HELLO)" />
       <input id="rowInput" type="number" min="0" max="14" placeholder="row 0-14" style="width:90px"/>
       <input id="colInput" type="number" min="0" max="14" placeholder="col 0-14" style="width:90px"/>
-      <select id="dirInput"><option value="across">across</option><option value="down">down</option></select>
+      <select id="dirInput">
+        <option value="across">across</option>
+        <option value="down">down</option>
+      </select>
       <button id="submitBtn">Submit</button>
       <button id="passBtn">Pass</button>
       <div id="message" class="small"></div>
