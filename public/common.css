@@ -1,125 +1,35 @@
-/* 🌟 Amber Scrabble Interhouse - Common Styles */
-
-body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #f39e16, #83204e);
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  min-height: 100vh;
+/* public/common.css - Amber Scrabble theme */
+:root {
+  --amber: #f39e16;
+  --purple: #83204e;
+  --bg1: linear-gradient(135deg, var(--amber), var(--purple));
+  --panel: rgba(0,0,0,0.15);
 }
+html,body { height:100%; margin:0; font-family: Inter, Arial, sans-serif; background: var(--bg1); color: #fff;}
+.header, header { text-align:center; padding:12px; }
+.container { max-width:1100px; margin: 0 auto; padding: 12px; }
+button { cursor:pointer; padding:8px 12px; border-radius:8px; border:none; font-weight:600; }
+.btn-small { padding:6px 10px; }
 
-header {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 15px 10px;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
-}
-
-h1, h2, h3 {
-  margin: 5px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-main {
-  margin-top: 20px;
-}
-
-button {
-  background: #f39e16;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 6px;
-  transition: all 0.2s ease;
-}
-
-button:hover {
-  background: #83204e;
-}
-
-.green { background-color: #2ecc71; }
-.yellow { background-color: #f1c40f; color: black; }
-.blue { background-color: #3498db; }
-.red { background-color: #e74c3c; }
-
-#board {
-  display: grid;
-  grid-template-columns: repeat(15, 35px);
-  grid-template-rows: repeat(15, 35px);
-  gap: 2px;
-  justify-content: center;
-  margin: 20px auto;
-}
-
+/* Board */
+.board { display:grid; grid-template-columns: repeat(15, 34px); grid-auto-rows: 34px; gap: 2px; justify-content:center; margin:18px auto; }
 .cell {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 16px;
-  color: #fff;
+  width:34px; height:34px; background: rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; font-weight:700; color:#000; border-radius:4px;
 }
+.cell.center { background: #ffd966; color:#000; font-weight:900; }
 
-.cell.center {
-  background: rgba(255, 255, 255, 0.3);
-  color: gold;
-}
+/* Rack */
+.rack { display:flex; gap:8px; justify-content:center; margin:12px 0; }
+.tile { width:38px; height:38px; background:#fff; color:#000; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:800; box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
 
-#rack {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 15px 0;
-}
+/* Admin */
+.controls { display:flex; gap:10px; justify-content:center; margin:12px; flex-wrap:wrap; }
+.scoreboard { width:320px; margin: 8px auto; background: var(--panel); padding:10px; border-radius:8px; color:#fff; }
+.scoreboard table { width:100%; border-collapse:collapse; color:#fff; }
+.scoreboard td, .scoreboard th { padding:6px; border-bottom:1px dashed rgba(255,255,255,0.08); text-transform:capitalize; }
 
-#rack div {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-  min-width: 30px;
-  text-align: center;
-}
+/* Misc */
+.panel { background: var(--panel); padding:10px; border-radius:8px; }
+.log { max-height:200px; overflow:auto; padding:8px; background: rgba(255,255,255,0.04); border-radius:6px; }
+.small { font-size:0.9rem; color: rgba(255,255,255,0.85); }
 
-footer {
-  margin-top: 25px;
-  background: rgba(0, 0, 0, 0.25);
-  padding: 10px 0;
-  font-size: 14px;
-}
-
-table {
-  width: 70%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-table th, table td {
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-#wordList {
-  list-style: none;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-#wordList li {
-  padding: 5px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
-}
-
-.turn-info, .word-log {
-  margin-top: 20px;
-}
