@@ -73,3 +73,28 @@ button { cursor:pointer; padding:8px 12px; border-radius:8px; border:none; font-
 .panel { background: var(--panel); padding:10px; border-radius:8px; }
 .log { max-height:200px; overflow:auto; padding:8px; background: rgba(255,255,255,0.04); border-radius:6px; }
 .small { font-size:0.9rem; color: rgba(255,255,255,0.85); }
+/* Header rows and columns */
+.header-row, .row-wrapper {
+  display: grid;
+  grid-template-columns: repeat(16, 34px);
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+}
+.header-cell {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: #fff;
+  opacity: 0.8;
+}
+
+/* Bonus tile color overlay (Amber Royal) */
+.cell.double-word { background: rgba(255,165,0,0.4); }
+.cell.triple-word { background: rgba(255,69,0,0.45); }
+.cell.double-letter { background: rgba(50,205,50,0.4); }
+.cell.triple-letter { background: rgba(30,144,255,0.45); }
+.cell.center { background: gold; color:#000; font-weight:900; }
