@@ -46,13 +46,30 @@ loadDictionary();
 
 // --- Scrabble helper values (basic letter values) ---
 const LETTER_VALUES = {
-  a:1,b:3,c:3,d:2,e:1,f:4,g:2,h:4,i:1,j:8,k:5,l:1,m:3,
-  n:1,o:1,p:3,q:10,r:1,s:1,t:1,u:1,v:4,w:4,x:8,y:4,z:10
+  a:1, b:3, c:3, d:2, e:1, f:4, g:2, h:4, i:1, j:8, k:5,
+  l:1, m:3, n:1, o:1, p:3, q:10, r:1, s:1, t:1, u:1,
+  v:4, w:4, x:8, y:4, z:10
 };
 
 // Basic bonus map (not exhaustive) - center 7,7 is DW
-const BONUS = {};
-BONUS['7,7'] = 'DW';
+const BONUS = {
+  "0,0": "TW","0,7":"TW","0,14":"TW",
+  "1,1": "DW","1,13": "DW",
+  "2,2": "DW","2,12": "DW",
+  "3,3": "DW","3,11": "DW",
+  "4,4": "DW","4,10": "DW",
+  "5,5": "TL","5,9": "TL",
+  "6,6": "DL","6,8": "DL",
+  "7,0": "TW","7,3": "DL","7,7": "⭐","7,11":"DL","7,14":"TW",
+  "8,6": "DL","8,8": "DL",
+  "9,5": "TL","9,9": "TL",
+  "10,4":"DW","10,10":"DW",
+  "11,3":"DW","11,11":"DW",
+  "12,2":"DW","12,12":"DW",
+  "13,1":"DW","13,13":"DW",
+  "14,0":"TW","14,7":"TW","14,14":"TW"
+};
+
 // (You can expand BONUS for full Scrabble layout later)
 
 // --- initial state (attempt load from save) ---
@@ -266,4 +283,5 @@ function getPlayersList() {
 server.listen(PORT, ()=> {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
 
