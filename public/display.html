@@ -1,32 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>DISPLAY — AMBER SCRABBLE INTERHOUSE</title>
-  <link rel="stylesheet" href="common.css">
+  <meta charset="UTF-8" />
+  <title>Amber Scrabble — Live Display</title>
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffb84d, #cc0066);
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.6rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .scoreboard {
+      width: 60%;
+      margin: 50px auto;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+    }
+
+    th, td {
+      padding: 16px;
+      font-size: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    th {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .arabica { color: #00bfff; font-weight: bold; }
+    .robusta { color: #ffa500; font-weight: bold; }
+    .excelsa { color: #32cd32; font-weight: bold; }
+    .liberica { color: #ff4c4c; font-weight: bold; }
+
+    footer {
+      margin-top: 40px;
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+  </style>
 </head>
 <body>
-  <header class="header"><h1>AMBER SCRABBLE — LIVE DISPLAY</h1></header>
-  <div class="container">
-    <div id="board" class="board"></div>
-    <div style="display:flex;gap:20px;justify-content:center;margin-top:12px;">
-      <div class="scoreboard panel">
-        <h3>Scores</h3>
-        <table>
-          <tr><td>Arabica</td><td id="score-arabica">0</td></tr>
-          <tr><td>Robusta</td><td id="score-robusta">0</td></tr>
-          <tr><td>Excelsa</td><td id="score-excelsa">0</td></tr>
-          <tr><td>Liberica</td><td id="score-liberica">0</td></tr>
-        </table>
-      </div>
-      <div class="panel" style="min-width:300px;">
-        <h3>Current Turn</h3>
-        <div id="currentTurn" style="font-size:1.3rem">--</div>
-        <h4 style="margin-top:10px">Recent Moves</h4>
-        <div id="recent" class="log"></div>
-      </div>
-    </div>
+  <h1>📺 Amber Scrabble — Interhouse Live Display</h1>
+
+  <div class="scoreboard">
+    <table>
+      <thead>
+        <tr><th>House</th><th>Score</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="arabica">🔵 Arabica</td><td id="arabicaScore">0</td></tr>
+        <tr><td class="robusta">🟠 Robusta</td><td id="robustaScore">0</td></tr>
+        <tr><td class="excelsa">🟢 Excelsa</td><td id="excelsaScore">0</td></tr>
+        <tr><td class="liberica">🔴 Liberica</td><td id="libericaScore">0</td></tr>
+      </tbody>
+    </table>
   </div>
+
+  <footer>✨ Amber Valley Residential School | Interhouse Scrabble ✨</footer>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="client-js/display.js"></script>
