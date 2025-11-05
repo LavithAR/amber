@@ -21,15 +21,71 @@ const dirInput = document.getElementById('dirInput');
 const msg = document.getElementById('message');
 
 // render empty 15x15 grid (cells are updated from state)
+// --- BONUS MAP for color overlay (Amber Royal style)
+const bonusMap = [
+  "TW . . DL . . . TW . . . DL . . TW",
+  ". DW . . . TL . . . TL . . . DW .",
+  ". . DW . . . DL . DL . . . DW . .",
+  "DL . . DW . . . DL . . . DW . . DL",
+  ". . . . DW . . . . . DW . . . .",
+  ". TL . . . TL . . . TL . . . TL .",
+  ". . DL . . . DL . DL . . . DL . .",
+  "TW . . DL . . . ⭐ . . . DL . . TW",
+  ". . DL . . . DL . DL . . . DL . .",
+  ". TL . . . TL . . . TL . . . TL .",
+  ". . . . DW . . . . . DW . . . .",
+  "DL . . DW . . . DL . . . DW . . DL",
+  ". . DW . . . DL . DL . . . DW . .",
+  ". DW . . . TL . . . TL . . . DW .",
+  "TW . . DL . . . TW . . . DL . . TW"
+].map(r => r.split(" "));
+
+// --- Updated renderBoard with numbers and color bonuses
 function renderBoard(grid) {
   boardEl.innerHTML = '';
 
-  // Top row (empty corner + numbers 1–15)
+  // Add column number headers
   const topRow = document.createElement('div');
-  topRow.className = 'row';
-  topRow.innerHTML = `<div class="corner"></div>` +
-    Array.from({ length: 15 }, (_, i) => `<div class="label top">${i + 1}</div>`).join('');
+  topRow.className = 'header-row';
+  const emptyCorner = document.createElement('div');
+  emptyCorner.className = 'header-cell';
+  topRow.appendChild(emptyCorner);
+  for (let c = 1; c <= 15; c++) {
+    const label = document.createElement('div');
+    label.className = 'header-cell';
+    label.innerText = c;
+    topRow.appendChild(label);
+  }
   boardEl.appendChild(topRow);
+
+  for (let r = 0; r < 15; r++) {
+    const rowWrapper = document.createElement('div');
+    rowWrapper.className = 'row-wrapper';
+
+    // Row number on left side
+    const rowLabel = document.createElement('div');
+    rowLabel.className = 'header-cell';
+    rowLabel.innerText = r + 1;
+    rowWrapper.appendChild(rowLabel);
+
+    for (let c = 0; c < 15; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const bonus = bonusMap[r][c];
+      if (bonus === '⭐') cell.classList.add('center');
+      if (bonus === 'TW') cell.classList.add('triple-word');
+      if (bonus === 'DW') cell.classList.add('double-word');
+      if (bonus === 'TL') cell.classList.add('triple-letter');
+      if (bonus === 'DL') cell.classList.add('double-letter');
+
+      const letter = grid?.[r]?.[c] || '';
+      if (letter) cell.innerText = letter;
+      rowWrapper.appendChild(cell);
+    }
+    boardEl.appendChild(rowWrapper);
+  }
+}
+
 
   // Rows with left numbers + cells
   for (let r = 0; r < 15; r++) {
